@@ -1,0 +1,20 @@
+<h1 mat-dialog-title>Thêm độc giả</h1>
+
+<div mat-dialog-content>
+  <mat-form-field appearance="outline">
+    <mat-label>Họ tên</mat-label>
+    <input matInput placeholder="Họ tên" [(ngModel)]="reader.name" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Địa chỉ</mat-label>
+    <input matInput placeholder="Địa chỉ" [(ngModel)]="reader.address" />
+  </mat-form-field>
+</div>
+
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="cancel()" color="warn">Huỷ bỏ</button>
+  <button mat-button cdkFocusInitial (click)="agree()" color="primary">
+    Xác nhận
+  </button>
+</div>

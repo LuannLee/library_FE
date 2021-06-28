@@ -1,0 +1,16 @@
+<h1 mat-dialog-title>Thêm thể loại</h1>
+
+<div mat-dialog-content>
+  <mat-form-field appearance="outline">
+    <mat-label>Tên thể loại</mat-label>
+    <input matInput placeholder="Tên thể loại" [(ngModel)]="category.name" />
+  </mat-form-field>
+
+</div>
+
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="cancel()" color="warn">Huỷ bỏ</button>
+  <button mat-button cdkFocusInitial (click)="agree()" color="primary">
+    Xác nhận
+  </button>
+</div>

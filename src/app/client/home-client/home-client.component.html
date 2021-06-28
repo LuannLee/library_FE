@@ -1,0 +1,36 @@
+  <!-- Tool bar -->
+  <mat-toolbar  fxLayout="row"
+                fxLayoutWrap
+                fxLayoutGap= 16px
+                fxLayoutAlign="space-around center"
+                class="tool-bar"
+ >
+    <div fxFlex=10>
+      <button mat-icon-button class="example-icon">
+        <mat-icon>auto_stories</mat-icon>
+      </button>
+      <span>Thư viện</span>
+    </div>
+
+    <!-- Search -->
+    <div fxFlex=60 fxLayoutAlign="center center" class="search">
+      <mat-form-field appearance="outline" style="width: 90%;">
+        <input matInput placeholder="Tên sách, tên tác giả, thể loại, ...">
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+    </div>
+
+    <div fxFlex = 5>
+      <button mat-icon-button >
+        <mat-icon>shopping_bag</mat-icon>
+      </button>
+    </div>
+
+  </mat-toolbar>
+
+    <!-- Main -->
+  <div class="main">
+    <router-outlet></router-outlet>
+  </div>
+
+

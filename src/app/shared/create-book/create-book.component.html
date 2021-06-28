@@ -1,0 +1,63 @@
+<h1 mat-dialog-title>Thêm Sách</h1>
+
+<div mat-dialog-content>
+  <form [formGroup]="bookForm" novalidate="false" (ngSubmit)="agree()">
+    <mat-form-field appearance="outline">
+      <mat-label>Tên sách</mat-label>
+      <input matInput placeholder="Tên sách" formControlName="name" required />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Năm xuất bản</mat-label>
+      <input
+        matInput
+        placeholder="Năm xuất bản"
+        formControlName="publishYear"
+      />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Tác giả</mat-label>
+      <mat-select formControlName="AuthorId" multiple required>
+        <mat-option *ngFor="let author of authors" [value]="author.id">
+          {{ author.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Thể loại</mat-label>
+      <mat-select formControlName="CategoryId" multiple required>
+        <mat-option *ngFor="let category of categories" [value]="category.id">
+          {{ category.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Nhà xuất bản</mat-label>
+      <mat-select formControlName="publishCompanyId" required>
+        <mat-option *ngFor="let company of companies" [value]="company.id">
+          {{ company.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Số lượng</mat-label>
+      <input
+        matInput
+        placeholder="Số lượng"
+        formControlName="quantity"
+        required
+      />
+    </mat-form-field>
+  </form>
+</div>
+
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="cancel()" color="warn">Huỷ bỏ</button>
+  <button mat-button cdkFocusInitial (click)="agree()" color="primary">
+    Xác nhận
+  </button>
+</div>

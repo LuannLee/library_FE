@@ -1,0 +1,26 @@
+<h1 mat-dialog-title>Cập nhật tác giả</h1>
+
+<div mat-dialog-content style="height: 220px;">
+  <form [formGroup]="authorForm" novalidate="false" (ngSubmit)="agree()">
+
+    <mat-form-field appearance="outline">
+      <mat-label>Họ tên</mat-label>
+      <input matInput placeholder="Họ tên" formControlName="name" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Website</mat-label>
+      <input matInput placeholder="Địa chỉ" formControlName="website" />
+    </mat-form-field>
+
+    <mat-slide-toggle formControlName="status">Hoạt động</mat-slide-toggle>
+
+  </form>
+</div>
+
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="cancel()" color="warn">Huỷ bỏ</button>
+  <button mat-button cdkFocusInitial (click)="agree()" color="primary">
+    Xác nhận
+  </button>
+</div>

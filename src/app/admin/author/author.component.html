@@ -1,0 +1,84 @@
+<div fxLayoutAlign="start center" class="header">
+  <span style="font-size: 1.5rem; font-weight: 500">Tác giả</span>
+</div>
+
+<div fxLayoutAlign="center center" class="content-container">
+  <div fxFlex="97" class="content">
+    <button
+      mat-raised-button
+      style="background-color: #1e88e5; color: white; float: right"
+      (click)="openCreateDialog()"
+    >
+      Thêm
+    </button>
+    <mat-form-field>
+      <mat-label>Tìm kiếm</mat-label>
+      <input matInput (keyup)="applyFilter($event)" #input>
+    </mat-form-field>
+
+    <table mat-table [dataSource]="authorSource">
+      <!-- Position Column -->
+      <ng-container matColumnDef="position">
+        <th mat-header-cell *matHeaderCellDef>No.</th>
+        <td mat-cell *matCellDef="let element; let i = index">
+          {{ i + paginator.pageIndex * paginator.pageSize + 1 }}
+        </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Họ tên</th>
+        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="website">
+        <th mat-header-cell *matHeaderCellDef>Website</th>
+        <td mat-cell *matCellDef="let element">{{ element.website }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="createdDate">
+        <th mat-header-cell *matHeaderCellDef>Ngày tạo</th>
+        <td mat-cell *matCellDef="let element">{{ element.createdDate | date: 'dd-MM-yyyy hh:mm a' }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="updatedDate">
+        <th mat-header-cell *matHeaderCellDef>Ngày sửa</th>
+        <td mat-cell *matCellDef="let element">{{ element.updatedDate | date: 'dd-MM-yyyy hh:mm a' }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>Trạng thái</th>
+        <td mat-cell *matCellDef="let element">
+          <mat-chip-list>
+            <mat-chip *ngIf="element.status == 1" style="background-color: #1E88E5;" selected>Hoạt động</mat-chip>
+            <mat-chip *ngIf="element.status == 0" style="background-color: #F44336;" selected>Khoá</mat-chip>
+          </mat-chip-list>
+        </td>
+      </ng-container>
+
+      <!-- controls -->
+      <ng-container matColumnDef="controls">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element">
+          <button
+            mat-icon-button
+            color="warn"
+            (click)="openconfirmDialog(element.id)"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr
+        mat-row
+        (dblclick)="openUpdateAuthorDialog(row)"
+        *matRowDef="let row; columns: displayedColumns"
+      ></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  </div>
+</div>

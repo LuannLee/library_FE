@@ -1,0 +1,86 @@
+<h1 mat-dialog-title>Thêm thẻ mượn</h1>
+
+<div mat-dialog-content style="width: 600px">
+  <form [formGroup]="borrowForm" novalidate="false" (ngSubmit)="agree()">
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <mat-form-field appearance="outline" style="width: 55%">
+        <mat-label>Độc giả</mat-label>
+        <mat-select formControlName="readerId" required>
+          <mat-option *ngFor="let reader of readers" [value]="reader.id">
+            {{ reader.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" style="width: 40%">
+        <mat-label>Ngày trả</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker"
+          formControlName="payDate"
+          required
+        />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="end center">
+      <button
+        mat-raised-button
+        type="button"
+        class="icon-plus"
+        (click)="AddBorrowDetail()"
+      >
+        <mat-icon>add_box</mat-icon>Thêm sách
+      </button>
+      <button
+        mat-raised-button
+        type="button"
+        class="icon-delete"
+        (click)="DeleteBorrowdetail()"
+      >
+        <mat-icon>disabled_by_default</mat-icon>Xoá sách
+      </button>
+    </div>
+
+    <mat-list *ngFor="let item of borrowDetails">
+      <mat-list-item>
+        <mat-form-field
+          appearance="outline"
+          style="width: 70%; margin-right: 1rem"
+        >
+          <mat-label>Sách</mat-label>
+          <mat-select
+            required
+            [(ngModel)]="item.bookId"
+            [ngModelOptions]="{ standalone: true }"
+          >
+            <mat-option *ngFor="let book of books" [value]="book.id">
+              {{ book.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" style="width: 30%">
+          <mat-label>Số lượng</mat-label>
+          <input
+            matInput
+            placeholder="Số lượng sách"
+            [(ngModel)]="item.quantity"
+            required
+            [ngModelOptions]="{ standalone: true }"
+          />
+        </mat-form-field>
+      </mat-list-item>
+      <mat-divider style="margin-bottom: 20px"></mat-divider>
+    </mat-list>
+  </form>
+</div>
+
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="cancel()" color="warn">Huỷ bỏ</button>
+  <button mat-button type="submit" cdkFocusInitial (click)="agree()" color="primary">
+    Xác nhận
+  </button>
+</div>
